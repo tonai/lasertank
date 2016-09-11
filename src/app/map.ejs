@@ -1,0 +1,22 @@
+<div class="map">
+  <div class="map__ground">
+    <% for(var i = 0; i < ground.length; i++) { %>
+      <div class="map__line">
+        <% for(var j = 0; j < ground[i].length; j++) { %>
+          <div class="map__cell">
+            <img src="<%= ground[i][j].image %>" />
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+  <div class="map__items">
+    <% for(var i = 0; i < items.length; i++) { %>
+      <% for(var j = 0; j < items[i].length; j++) { %>
+        <% if (items[i][j]) { %>
+          <img src="<%= items[i][j].image %>" class="item js-item-<%= i %>-<%= j %>" />
+        <% } %>
+      <% } %>
+    <% } %>
+  </div>
+</div>

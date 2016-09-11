@@ -1,0 +1,35 @@
+.map {
+  position: relative;
+}
+
+.map__items {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.map__ground {
+  display: table;
+}
+
+.map__line {
+  display: table-row;
+}
+
+.map__cell {
+  display: table-cell;
+  width: 29px;
+  height: 29px;
+
+  > img {
+    display: block;
+  }
+}
+
+.item {
+  position: relative;
+  transition: all 200ms;
+}
