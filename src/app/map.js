@@ -1,4 +1,4 @@
-import $ from 'jquery';
+
 import map from './maps/map';
 import mapTmpl from './map.ejs';
 import blocks from './blocks';
@@ -37,18 +37,18 @@ export default {
   },
 
   draw() {
-    const $game = $('#game')
-      .html(mapTmpl({
-        ground: this.groundMap,
-        items: this.itemsMap
-      }));
+    const gameEl = document.getElementById('game');
+    gameEl.innerHTML = mapTmpl({
+      ground: this.groundMap,
+      items: this.itemsMap
+    });
 
     this.itemsMap
       .forEach(line => {
         line
           .forEach(block => {
             if (block) {
-              block.$el = $game.find(`.js-item-${block.line}-${block.column}`);
+              block.el = gameEl.querySelector(`.js-item-${block.line}-${block.column}`);
             }
           });
       });

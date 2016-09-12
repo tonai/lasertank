@@ -4,7 +4,7 @@ export default itemFactory;
 
 function itemFactory(line, column) {
   const item = {
-    $el: null,
+    el: null,
     ground: grassFactory.id,
 
     canMoveOver() {

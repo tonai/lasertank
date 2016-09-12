@@ -13,10 +13,8 @@ function movableFactory(line, column) {
   };
 
   function animate(block) {
-    block.$el.css({
-      left: `${block.column * 29}px`,
-      top: `${block.line * 29}px`
-    });
+    block.el.style.left = `${block.column * 29}px`;
+    block.el.style.top = `${block.line * 29}px`;
   }
 
   return movable;

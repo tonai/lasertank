@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import groundFactory from './ground';
 
 export default flagFactory;
@@ -13,7 +12,7 @@ function flagFactory(line, column) {
     column,
 
     moveOverAfter(block) {
-      $(document).trigger('win');
+      document.dispatchEvent(new Event('win'));
     }
   };
 

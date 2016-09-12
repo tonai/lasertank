@@ -35,9 +35,7 @@ function rotableFactory(line, column) {
   };
 
   function animate(block) {
-    block.$el.css({
-      transform: `rotateZ(${block.angle}deg)`
-    });
+    block.el.style.transform = `rotateZ(${block.angle}deg)`;
   }
 
   return rotable;
