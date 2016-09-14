@@ -16,6 +16,15 @@ module.exports = {
         ]
       },
       {
+        test: /\.(css|scss)$/,
+        loaders: [
+          'style',
+          'css',
+          'sass',
+          'postcss'
+        ]
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: [
@@ -30,6 +39,12 @@ module.exports = {
         ]
       },
       {
+        test: /\.ejs$/,
+        loader: [
+          'ejs-loader'
+        ]
+      },
+      {
         test: /\.js$/,
         exclude: /(node_modules|.*\.spec\.js)/,
         loader: 'isparta'
@@ -38,5 +53,12 @@ module.exports = {
   },
   plugins: [],
   debug: true,
-  devtool: 'cheap-module-eval-source-map'
+  devtool: 'cheap-module-eval-source-map',
+  isparta: {
+    embedSource: true,
+    noAutoWrap: true,
+    babel: {
+      plugins: 'rewire'
+    }
+  }
 };

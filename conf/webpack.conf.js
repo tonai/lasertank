@@ -35,7 +35,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: [
-          'ng-annotate',
           'babel'
         ]
       },
@@ -50,7 +49,7 @@ module.exports = {
         loader: [
           'ejs-loader'
         ]
-      },
+      }
     ]
   },
   plugins: [

@@ -17,21 +17,14 @@ module.exports = function (config) {
     ],
     files: [
       'node_modules/es6-shim/es6-shim.js',
-      conf.path.src('index.spec.js'),
-      conf.path.src('**/*.html')
+      conf.path.src('index.spec.js')
     ],
     preprocessors: {
       [conf.path.src('index.spec.js')]: [
         'webpack'
-      ],
-      [conf.path.src('**/*.html')]: [
-        'ng-html2js'
       ]
     },
-    ngHtml2JsPreprocessor: {
-      stripPrefix: `${conf.paths.src}/`
-    },
-    reporters: ['progress', 'coverage'],
+    reporters: ['spec', 'coverage'],
     coverageReporter: {
       type: 'html',
       dir: 'coverage/'
@@ -46,8 +39,8 @@ module.exports = function (config) {
       require('karma-coverage'),
       require('karma-phantomjs-launcher'),
       require('karma-phantomjs-shim'),
-      require('karma-ng-html2js-preprocessor'),
-      require('karma-webpack')
+      require('karma-webpack'),
+      require('karma-spec-reporter')
     ]
   };
 
