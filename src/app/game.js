@@ -1,6 +1,9 @@
-import map from './map';
+import mapFactory from './map';
 
+const map = mapFactory();
+const gameEl = document.getElementById('game');
 map.init();
+map.draw(gameEl);
 const player = map.player;
 
 if (player) {

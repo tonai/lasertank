@@ -4,6 +4,8 @@ export default itemFactory;
 
 function itemFactory(line, column) {
   const item = {
+    line,
+    column,
     el: null,
     ground: grassFactory.id,
 

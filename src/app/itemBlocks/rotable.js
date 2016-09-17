@@ -2,6 +2,8 @@ export default rotableFactory;
 
 function rotableFactory(line, column) {
   const rotable = {
+    line,
+    column,
     direction: 38,
     angle: 0,
 

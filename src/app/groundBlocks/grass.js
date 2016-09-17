@@ -1,15 +1,13 @@
 import groundFactory from './ground';
 
-export default grassFactory;
-
 const id = 1;
 function grassFactory(line, column) {
   const ground = groundFactory(line, column);
   const grass = {
-    id,
-    image: 'assets/images/grass.png',
     line,
-    column
+    column,
+    id,
+    image: 'assets/images/grass.png'
   };
 
   return Object.assign(
@@ -19,3 +17,5 @@ function grassFactory(line, column) {
   );
 }
 grassFactory.id = id;
+
+export default grassFactory;

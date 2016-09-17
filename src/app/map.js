@@ -1,28 +1,28 @@
-
-import map from './maps/map';
+import mapSave from './maps/map';
 import mapTmpl from './map.ejs';
-import blocks from './blocks';
+import blocksFactory from './blocks';
 import tankFactory from './itemBlocks/tank';
 import './map.scss';
 
-export default {
+const map = {
   init() {
+    this.blocks = blocksFactory();
     this.groundMap = [];
     this.itemsMap = [];
 
-    map
+    mapSave
       .forEach((line, x) => {
         this.groundMap.push([]);
         this.itemsMap.push([]);
         line
           .forEach((cell, y) => {
-            const block = blocks[cell](x, y);
+            const block = this.blocks[cell](x, y);
             if (block.id === tankFactory.id) {
               this.player = block;
             }
             if (block.ground) {
               this.itemsMap[x].push(block);
-              this.groundMap[x].push(blocks[block.ground](x, y));
+              this.groundMap[x].push(this.blocks[block.ground](x, y));
             } else {
               this.itemsMap[x].push(null);
               this.groundMap[x].push(block);
@@ -32,12 +32,9 @@ export default {
 
     this.totalColumns = this.groundMap[0].length;
     this.totaLines = this.groundMap.length;
-
-    this.draw();
   },
 
-  draw() {
-    const gameEl = document.getElementById('game');
+  draw(gameEl) {
     gameEl.innerHTML = mapTmpl({
       ground: this.groundMap,
       items: this.itemsMap
@@ -60,3 +57,7 @@ export default {
       this.groundMap[line][column];
   }
 };
+
+export default function () {
+  return map;
+}

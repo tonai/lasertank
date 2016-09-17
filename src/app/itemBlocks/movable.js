@@ -1,11 +1,15 @@
-import map from '../map';
+import mapFactory from '../map';
 
 export default movableFactory;
 
 function movableFactory(line, column) {
   const movable = {
+    line,
+    column,
+    map: mapFactory(),
+
     move(linePos, columnPos) {
-      const groundBlock = map.getBlock(linePos, columnPos);
+      const groundBlock = this.map.getBlock(linePos, columnPos);
       groundBlock.moveOverBefore(this);
       animate(this);
       groundBlock.moveOverAfter(this);

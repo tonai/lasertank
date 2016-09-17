@@ -10,10 +10,10 @@ function tankFactory(line, column) {
   const movable = movableFactory(line, column);
   const rotable = rotableFactory(line, column);
   const tank = {
-    id,
-    image: 'assets/images/tank.png',
     line,
-    column
+    column,
+    id,
+    image: 'assets/images/tank.png'
   };
 
   return Object.assign(

@@ -6,10 +6,10 @@ const id = 2;
 function flagFactory(line, column) {
   const ground = groundFactory(line, column);
   const flag = {
-    id,
-    image: 'assets/images/flag.png',
     line,
     column,
+    id,
+    image: 'assets/images/flag.png',
 
     moveOverAfter(block) {
       document.dispatchEvent(new Event('win'));
