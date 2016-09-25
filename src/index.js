@@ -1,1 +1,2 @@
-import './app/game';
+import gameFactory from './app/game';
+gameFactory().init();

@@ -1,62 +1,93 @@
 import mapFactory from './map';
 
-const map = mapFactory();
-const gameEl = document.getElementById('game');
-map.init();
-map.draw(gameEl);
-const player = map.player;
+const game = {
+  init() {
+    this.map = mapFactory();
+    this.map.init();
+    this.map.draw(document.getElementById('game'));
 
-if (player) {
-  document.addEventListener('keydown', keydownCallback);
-  document.addEventListener('win', winCallback);
-}
+    this.player = this.map.player;
+    this.events = {};
+    this.isPaused = false;
 
-function keydownCallback(event) {
-  const direction = event.keyCode;
+    if (this.player) {
+      this.events.keydown = this.keydownCallback.bind(this);
+      this.events.win = this.winCallback.bind(this);
+      this.events.actionStart = () => (this.isPaused = true);
+      this.events.actionEnd = () => (this.isPaused = false);
+      Object
+        .keys(this.events)
+        .forEach(eventName => document.addEventListener(eventName, this.events[eventName]));
+    }
+  },
 
-  if (direction === player.direction) {
-    switch (direction) {
+  keydownCallback(event) {
+    if (this.isPaused) {
+      return false;
+    }
+
+    const keyCode = event.keyCode;
+    switch (keyCode) {
+      case 32: // space bar
+        this.player.shoot();
+        break;
+
       case 37: // left
-        if (player.column > 0) {
-          if (map.getBlock(player.line, player.column - 1).canMoveOver()) {
-            player.move(player.line, player.column - 1);
+        if (keyCode === this.player.direction) {
+          const block = this.map.getBlock(this.player.line, this.player.column - 1);
+          if (block && block.canMoveOver()) {
+            this.player.move(this.player.line, this.player.column - 1);
           }
+        } else {
+          this.player.rotate(keyCode);
         }
         break;
 
       case 38: // top
-        if (player.line > 0) {
-          if (map.getBlock(player.line - 1, player.column).canMoveOver()) {
-            player.move(player.line - 1, player.column);
+        if (keyCode === this.player.direction) {
+          const block = this.map.getBlock(this.player.line - 1, this.player.column);
+          if (block && block.canMoveOver()) {
+            this.player.move(this.player.line - 1, this.player.column);
           }
+        } else {
+          this.player.rotate(keyCode);
         }
         break;
 
       case 39: // right
-        if (player.column < map.totaLines - 1) {
-          if (map.getBlock(player.line, player.column + 1).canMoveOver()) {
-            player.move(player.line, player.column + 1);
+        if (keyCode === this.player.direction) {
+          const block = this.map.getBlock(this.player.line, this.player.column + 1);
+          if (block && block.canMoveOver()) {
+            this.player.move(this.player.line, this.player.column + 1);
           }
+        } else {
+          this.player.rotate(keyCode);
         }
         break;
 
       case 40: // bottom
-        if (player.line < map.totalColumns - 1) {
-          if (map.getBlock(player.line + 1, player.column).canMoveOver()) {
-            player.move(player.line + 1, player.column);
+        if (keyCode === this.player.direction) {
+          const block = this.map.getBlock(this.player.line + 1, this.player.column);
+          if (block && block.canMoveOver()) {
+            this.player.move(this.player.line + 1, this.player.column);
           }
+        } else {
+          this.player.rotate(keyCode);
         }
         break;
 
       default:
     }
-  } else {
-    player.rotate(direction);
-  }
-}
+  },
 
-function winCallback() {
-  console.log('You win !');
-  document.removeEventListener('keydown', keydownCallback);
-  document.removeEventListener('win', winCallback);
+  winCallback() {
+    console.log('You win !');
+    Object
+      .keys(this.events)
+      .forEach(eventName => document.removeEventListener(eventName, this.events[eventName]));
+  }
+};
+
+export default function () {
+  return game;
 }

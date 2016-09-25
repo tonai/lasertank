@@ -1,5 +1,5 @@
 <div class="map">
-  <div class="map__ground">
+  <div class="map__ground-area">
     <% for(var i = 0; i < ground.length; i++) { %>
       <div class="map__line">
         <% for(var j = 0; j < ground[i].length; j++) { %>
@@ -10,7 +10,7 @@
       </div>
     <% } %>
   </div>
-  <div class="map__items">
+  <div class="map__items-area">
     <% for(var i = 0; i < items.length; i++) { %>
       <% for(var j = 0; j < items[i].length; j++) { %>
         <% if (items[i][j]) { %>
@@ -19,4 +19,5 @@
       <% } %>
     <% } %>
   </div>
+  <canvas class="map__shoot-area js-shoot-area" width="<%= width %>" height="<%= height %>"></canvas>
 </div>

@@ -1,17 +1,20 @@
+$transitionSpeed: 200ms;
+
 .map {
   position: relative;
+  display: inline-block;
 }
 
-.map__items {
+.map__items-area {
   display: block;
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.map__ground {
+.map__ground-area {
   display: table;
 }
 
@@ -31,5 +34,12 @@
 
 .item {
   position: relative;
-  transition: all 200ms;
+  transition: all $transitionSpeed;
+}
+
+.map__shoot-area {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

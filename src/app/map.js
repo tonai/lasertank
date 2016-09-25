@@ -37,8 +37,14 @@ const map = {
   draw(gameEl) {
     gameEl.innerHTML = mapTmpl({
       ground: this.groundMap,
-      items: this.itemsMap
+      items: this.itemsMap,
+      width: this.totalColumns * 29,
+      height: this.totaLines * 29
     });
+
+    this.shootAreaEl = gameEl.querySelector('.js-shoot-area');
+    this.shootAreaCtx = this.shootAreaEl.getContext('2d');
+    this.shootAreaData = this.shootAreaCtx.getImageData(0, 0, this.shootAreaEl.width, this.shootAreaEl.height);
 
     this.itemsMap
       .forEach(line => {
@@ -52,9 +58,30 @@ const map = {
   },
 
   getBlock(line, column) {
+    if (line < 0 || column < 0 || line > this.totaLines - 1 || column > this.totalColumns - 1) {
+      return false;
+    }
     return this.itemsMap[line][column] ?
       this.itemsMap[line][column] :
       this.groundMap[line][column];
+  },
+
+  drawCanvasPixel(x, y, r, g, b, a) {
+    // this.shootAreaCtx.fillRect(x, y, 1, 1);
+    const index = (x + y * this.shootAreaEl.width) * 4;
+    this.shootAreaData.data[index + 0] = r;
+    this.shootAreaData.data[index + 1] = g;
+    this.shootAreaData.data[index + 2] = b;
+    this.shootAreaData.data[index + 3] = a;
+  },
+
+  updateCanvas() {
+    this.shootAreaCtx.putImageData(this.shootAreaData, 0, 0);
+  },
+
+  clearCanvas() {
+    this.shootAreaCtx.clearRect(0, 0, this.shootAreaEl.width, this.shootAreaEl.height);
+    this.shootAreaData = this.shootAreaCtx.getImageData(0, 0, this.shootAreaEl.width, this.shootAreaEl.height);
   }
 };
 
