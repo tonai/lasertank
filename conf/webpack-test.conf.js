@@ -53,7 +53,7 @@ module.exports = {
   },
   plugins: [],
   debug: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-source-map',
   isparta: {
     embedSource: true,
     noAutoWrap: true,
