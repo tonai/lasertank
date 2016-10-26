@@ -67,7 +67,6 @@ const map = {
   },
 
   drawCanvasPixel(x, y, r, g, b, a) {
-    // this.shootAreaCtx.fillRect(x, y, 1, 1);
     const index = (x + y * this.shootAreaEl.width) * 4;
     this.shootAreaData.data[index + 0] = r;
     this.shootAreaData.data[index + 1] = g;

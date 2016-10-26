@@ -8,44 +8,48 @@ function shooterFactory(line, column) {
     column,
     direction: 38,
     map: mapFactory(),
+    speed: 500, // px/s
 
     shoot() {
       document.dispatchEvent(new Event('actionStart'));
-      this
-        .drawShoot(this)
-        .then(() => {
-          this.map.clearCanvas();
-          document.dispatchEvent(new Event('actionEnd'));
-        });
+      this.pointList = this.getPointList(this);
+      requestAnimationFrame(this.drawStep.bind(this));
     },
 
-    drawShoot(block) {
-      const pointList = block.shootOverBefore(this.direction);
-      let promise = this.animateShoot(pointList);
+    getPointList(block) {
+      let pointList = block.shootOverBefore(this.direction);
       const coords = block.shootOverAfter(this.direction);
       if (coords) {
         const block = this.map.getBlock(coords.line, coords.column);
         if (block) {
-          promise = promise.then(this.drawShoot.bind(this, block));
+          pointList = pointList.concat(this.getPointList(block));
         }
       }
-      return promise;
+      return pointList;
     },
 
-    animateShoot(pointList) {
-      let promise = new Promise(resolve => resolve());
-      pointList.forEach(point => (promise = promise.then(this.drawPoint.bind(this, point))));
-      return promise;
+    drawStep(timestamp) {
+      this.start = this.start || timestamp;
+      const pointLength = (timestamp - this.start) / 1000 * this.speed;
+      if (pointLength >= this.pointList.length) {
+        this.drawPointList(this.pointList.length);
+        setTimeout(this.drawEnd.bind(this), 100);
+      } else {
+        this.drawPointList(pointLength);
+        requestAnimationFrame(this.drawStep.bind(this));
+      }
     },
 
-    drawPoint(point) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          this.map.drawCanvasPixel(point.column, point.line, 255, 0, 0, 255);
-          this.map.updateCanvas();
-          resolve();
-        }, 0);
-      });
+    drawEnd() {
+      document.dispatchEvent(new Event('actionEnd'));
+      this.map.clearCanvas();
+      this.start = null;
+    },
+
+    drawPointList(pointLength) {
+      const pointList = this.pointList.slice(0, pointLength);
+      pointList.forEach(point => this.map.drawCanvasPixel(point.column, point.line, 255, 0, 0, 255));
+      this.map.updateCanvas();
     }
   };
 
