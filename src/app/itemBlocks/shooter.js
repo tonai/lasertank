@@ -41,9 +41,9 @@ function shooterFactory(line, column) {
     },
 
     drawEnd() {
-      document.dispatchEvent(new Event('actionEnd'));
       this.map.clearCanvas();
       this.start = null;
+      document.dispatchEvent(new Event('actionEnd'));
     },
 
     drawPointList(pointLength) {

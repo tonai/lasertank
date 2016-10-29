@@ -51,5 +51,43 @@ describe('mapFactory', () => {
     it('should return a flag block', () => {
       expect(map.getBlock(1, 1)).toEqual(jasmine.objectContaining({id: 2}));
     });
+
+    it('should not return a block (out of bound)', () => {
+      expect(map.getBlock(2, 2)).toBe(false);
+    });
+  });
+
+  describe('drawCanvasPixel method', () => {
+    it('should draw a pixel on the first line of the canvas', () => {
+      map.drawCanvasPixel(0, 0, 1, 2, 3, 4);
+      expect(map.shootAreaData.data[0]).toEqual(1);
+      expect(map.shootAreaData.data[1]).toEqual(2);
+      expect(map.shootAreaData.data[2]).toEqual(3);
+      expect(map.shootAreaData.data[3]).toEqual(4);
+    });
+
+    it('should draw a pixel on the second line of the canvas', () => {
+      map.drawCanvasPixel(0, 1, 1, 2, 3, 4);
+      expect(map.shootAreaData.data[232]).toEqual(1);
+      expect(map.shootAreaData.data[233]).toEqual(2);
+      expect(map.shootAreaData.data[234]).toEqual(3);
+      expect(map.shootAreaData.data[235]).toEqual(4);
+    });
+  });
+
+  describe('updateCanvas method', () => {
+    it('should draw the canvas data', () => {
+      spyOn(map.shootAreaCtx, 'putImageData');
+      map.updateCanvas();
+      expect(map.shootAreaCtx.putImageData).toHaveBeenCalled();
+    });
+  });
+
+  describe('clearCanvas method', () => {
+    it('should draw the canvas data', () => {
+      spyOn(map.shootAreaCtx, 'clearRect');
+      map.clearCanvas();
+      expect(map.shootAreaCtx.clearRect).toHaveBeenCalledWith(0, 0, 58, 58);
+    });
   });
 });
