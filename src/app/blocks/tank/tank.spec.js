@@ -12,14 +12,14 @@ const moverMethodSpy = jasmine.createSpy('moverMethod');
 const moverFactorySpy = jasmine.createSpy('moverFactory').and.callFake(() => ({
   moverMethod: moverMethodSpy
 }));
-const rotableMethodSpy = jasmine.createSpy('rotableMethod');
-const rotableFactorySpy = jasmine.createSpy('rotableFactory').and.callFake(() => ({
-  rotableMethod: rotableMethodSpy
+const rotatorMethodSpy = jasmine.createSpy('rotatorMethod');
+const rotatorFactorySpy = jasmine.createSpy('rotatorFactory').and.callFake(() => ({
+  rotatorMethod: rotatorMethodSpy
 }));
 tankFactory.__set__('groundFactory', groundFactorySpy);
 tankFactory.__set__('itemFactory', itemFactorySpy);
 tankFactory.__set__('moverFactory', moverFactorySpy);
-tankFactory.__set__('rotableFactory', rotableFactorySpy);
+tankFactory.__set__('rotatorFactory', rotatorFactorySpy);
 
 describe('tankFactory', () => {
   let tank;
@@ -37,11 +37,11 @@ describe('tankFactory', () => {
       expect(tank.column).toEqual(2);
     });
 
-    it('should call the ground, item, mover and rotable factories', () => {
+    it('should call the ground, item, mover and rotator factories', () => {
       expect(groundFactorySpy).toHaveBeenCalledWith(1, 2);
       expect(itemFactorySpy).toHaveBeenCalledWith(1, 2);
       expect(moverFactorySpy).toHaveBeenCalledWith(1, 2);
-      expect(rotableFactorySpy).toHaveBeenCalledWith(1, 2);
+      expect(rotatorFactorySpy).toHaveBeenCalledWith(1, 2);
     });
 
     it('should call an ground method', () => {
@@ -62,10 +62,10 @@ describe('tankFactory', () => {
       expect(moverMethodSpy).toHaveBeenCalledWith('test');
     });
 
-    it('should call a rotable method', () => {
-      expect(tank.rotableMethod).toBeDefined();
-      tank.rotableMethod('test');
-      expect(rotableMethodSpy).toHaveBeenCalledWith('test');
+    it('should call a rotator method', () => {
+      expect(tank.rotatorMethod).toBeDefined();
+      tank.rotatorMethod('test');
+      expect(rotatorMethodSpy).toHaveBeenCalledWith('test');
     });
   });
 

@@ -3,7 +3,7 @@ import groundFactory from '../ground/ground';
 import itemFactory from '../item/item';
 import shooterFactory from '../shooter/shooter';
 import moverFactory from '../mover/mover';
-import rotableFactory from '../rotable/rotable';
+import rotatorFactory from '../rotator/rotator';
 
 export default tankFactory;
 
@@ -12,7 +12,7 @@ function tankFactory(line, column) {
   const item = itemFactory(line, column);
   const shooter = shooterFactory(line, column);
   const mover = moverFactory(line, column);
-  const rotable = rotableFactory(line, column);
+  const rotator = rotatorFactory(line, column);
   const tank = {
     line,
     column,
@@ -30,7 +30,7 @@ function tankFactory(line, column) {
     item,
     shooter,
     mover,
-    rotable,
+    rotator,
     tank
   );
 }

@@ -1,7 +1,7 @@
-export default rotableFactory;
+export default rotatorFactory;
 
-function rotableFactory(line, column) {
-  const rotable = {
+function rotatorFactory(line, column) {
+  const rotator = {
     line,
     column,
     direction: 38,
@@ -40,5 +40,5 @@ function rotableFactory(line, column) {
     block.el.style.transform = `rotateZ(${block.angle}deg)`;
   }
 
-  return rotable;
+  return rotator;
 }
