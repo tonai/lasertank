@@ -1,10 +1,10 @@
 import themeSettings from '../../settings/themeSettings';
 import mapFactory from '../../map';
 
-export default movableFactory;
+export default moverFactory;
 
-function movableFactory(line, column) {
-  const movable = {
+function moverFactory(line, column) {
+  const mover = {
     line,
     column,
     map: mapFactory(),
@@ -24,5 +24,5 @@ function movableFactory(line, column) {
     block.el.style.top = `${block.line * themeSettings.width}px`;
   }
 
-  return movable;
+  return mover;
 }

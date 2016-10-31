@@ -8,9 +8,9 @@ const itemMethodSpy = jasmine.createSpy('itemMethod');
 const itemFactorySpy = jasmine.createSpy('itemFactory').and.callFake(() => ({
   itemMethod: itemMethodSpy
 }));
-const movableMethodSpy = jasmine.createSpy('movableMethod');
-const movableFactorySpy = jasmine.createSpy('movableFactory').and.callFake(() => ({
-  movableMethod: movableMethodSpy
+const moverMethodSpy = jasmine.createSpy('moverMethod');
+const moverFactorySpy = jasmine.createSpy('moverFactory').and.callFake(() => ({
+  moverMethod: moverMethodSpy
 }));
 const rotableMethodSpy = jasmine.createSpy('rotableMethod');
 const rotableFactorySpy = jasmine.createSpy('rotableFactory').and.callFake(() => ({
@@ -18,7 +18,7 @@ const rotableFactorySpy = jasmine.createSpy('rotableFactory').and.callFake(() =>
 }));
 tankFactory.__set__('groundFactory', groundFactorySpy);
 tankFactory.__set__('itemFactory', itemFactorySpy);
-tankFactory.__set__('movableFactory', movableFactorySpy);
+tankFactory.__set__('moverFactory', moverFactorySpy);
 tankFactory.__set__('rotableFactory', rotableFactorySpy);
 
 describe('tankFactory', () => {
@@ -37,10 +37,10 @@ describe('tankFactory', () => {
       expect(tank.column).toEqual(2);
     });
 
-    it('should call the ground, item, movable and rotable factories', () => {
+    it('should call the ground, item, mover and rotable factories', () => {
       expect(groundFactorySpy).toHaveBeenCalledWith(1, 2);
       expect(itemFactorySpy).toHaveBeenCalledWith(1, 2);
-      expect(movableFactorySpy).toHaveBeenCalledWith(1, 2);
+      expect(moverFactorySpy).toHaveBeenCalledWith(1, 2);
       expect(rotableFactorySpy).toHaveBeenCalledWith(1, 2);
     });
 
@@ -56,10 +56,10 @@ describe('tankFactory', () => {
       expect(itemMethodSpy).toHaveBeenCalledWith('test');
     });
 
-    it('should call a movable method', () => {
-      expect(tank.movableMethod).toBeDefined();
-      tank.movableMethod('test');
-      expect(movableMethodSpy).toHaveBeenCalledWith('test');
+    it('should call a mover method', () => {
+      expect(tank.moverMethod).toBeDefined();
+      tank.moverMethod('test');
+      expect(moverMethodSpy).toHaveBeenCalledWith('test');
     });
 
     it('should call a rotable method', () => {
