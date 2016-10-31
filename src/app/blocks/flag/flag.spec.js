@@ -1,10 +1,10 @@
 import flagFactory from './flag';
 
-const groundMethodSpy = jasmine.createSpy('groundMethod');
-const groundFactorySpy = jasmine.createSpy('groundFactory').and.callFake(() => ({
-  groundMethod: groundMethodSpy
+const canMoveOverMethodSpy = jasmine.createSpy('canMoveOverMethod');
+const canMoveOverFactorySpy = jasmine.createSpy('canMoveOverFactory').and.callFake(() => ({
+  canMoveOverMethod: canMoveOverMethodSpy
 }));
-flagFactory.__set__('groundFactory', groundFactorySpy);
+flagFactory.__set__('canMoveOverFactory', canMoveOverFactorySpy);
 
 describe('flagFactory', () => {
   let flag;
@@ -22,14 +22,14 @@ describe('flagFactory', () => {
       expect(flag.column).toEqual(2);
     });
 
-    it('should call the ground factory', () => {
-      expect(groundFactorySpy).toHaveBeenCalledWith(1, 2);
+    it('should call the canMoveOver factory', () => {
+      expect(canMoveOverFactorySpy).toHaveBeenCalledWith(1, 2);
     });
 
-    it('should call a ground method', () => {
-      expect(flag.groundMethod).toBeDefined();
-      flag.groundMethod('test');
-      expect(groundMethodSpy).toHaveBeenCalledWith('test');
+    it('should call a canMoveOver method', () => {
+      expect(flag.canMoveOverMethod).toBeDefined();
+      flag.canMoveOverMethod('test');
+      expect(canMoveOverMethodSpy).toHaveBeenCalledWith('test');
     });
   });
 

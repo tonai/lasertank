@@ -1,5 +1,11 @@
 import blockFactory from './block';
 
+const cannotMoveOverMethodSpy = jasmine.createSpy('cannotMoveOverMethod');
+const cannotMoveOverFactorySpy = jasmine.createSpy('cannotMoveOverFactory').and.callFake(() => ({
+  cannotMoveOverMethod: cannotMoveOverMethodSpy
+}));
+blockFactory.__set__('cannotMoveOverFactory', cannotMoveOverFactorySpy);
+
 describe('blockFactory', () => {
   let block;
 
@@ -15,11 +21,15 @@ describe('blockFactory', () => {
       expect(block.line).toEqual(1);
       expect(block.column).toEqual(2);
     });
-  });
 
-  describe('canMoveOver method', () => {
-    it('should return false', () => {
-      expect(block.canMoveOver()).toEqual(false);
+    it('should call the canMoveOver factory', () => {
+      expect(cannotMoveOverFactorySpy).toHaveBeenCalledWith(1, 2);
+    });
+
+    it('should call a canMoveOver method', () => {
+      expect(block.cannotMoveOverMethod).toBeDefined();
+      block.cannotMoveOverMethod('test');
+      expect(cannotMoveOverMethodSpy).toHaveBeenCalledWith('test');
     });
   });
 

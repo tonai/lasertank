@@ -1,8 +1,8 @@
 import blockSettings from '../../settings/blockSettings';
-import groundFactory from '../ground/ground';
+import canMoveOverFactory from '../canMoveOver/canMoveOver';
 
 function grassFactory(line, column) {
-  const ground = groundFactory(line, column);
+  const canMoveOver = canMoveOverFactory(line, column);
   const grass = {
     line,
     column,
@@ -12,7 +12,7 @@ function grassFactory(line, column) {
 
   return Object.assign(
     {},
-    ground,
+    canMoveOver,
     grass
   );
 }

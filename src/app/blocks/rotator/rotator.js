@@ -1,9 +1,13 @@
+import blockSettings from '../../settings/blockSettings';
+
 export default rotatorFactory;
 
 function rotatorFactory(line, column) {
   const rotator = {
     line,
     column,
+    el: null,
+    ground: blockSettings.grass,
     direction: 38,
     angle: 0,
 

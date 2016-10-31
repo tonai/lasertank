@@ -1,3 +1,4 @@
+import blockSettings from '../../settings/blockSettings';
 import themeSettings from '../../settings/themeSettings';
 import mapFactory from '../../map';
 
@@ -7,6 +8,8 @@ function moverFactory(line, column) {
   const mover = {
     line,
     column,
+    el: null,
+    ground: blockSettings.grass,
     map: mapFactory(),
 
     move(linePos, columnPos) {

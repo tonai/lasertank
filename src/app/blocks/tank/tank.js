@@ -1,6 +1,5 @@
 import blockSettings from '../../settings/blockSettings';
-import groundFactory from '../ground/ground';
-import itemFactory from '../item/item';
+import canMoveOverFactory from '../canMoveOver/canMoveOver';
 import shooterFactory from '../shooter/shooter';
 import moverFactory from '../mover/mover';
 import rotatorFactory from '../rotator/rotator';
@@ -8,8 +7,7 @@ import rotatorFactory from '../rotator/rotator';
 export default tankFactory;
 
 function tankFactory(line, column) {
-  const ground = groundFactory(line, column);
-  const item = itemFactory(line, column);
+  const canMoveOver = canMoveOverFactory(line, column);
   const shooter = shooterFactory(line, column);
   const mover = moverFactory(line, column);
   const rotator = rotatorFactory(line, column);
@@ -26,8 +24,7 @@ function tankFactory(line, column) {
 
   return Object.assign(
     {},
-    ground,
-    item,
+    canMoveOver,
     shooter,
     mover,
     rotator,

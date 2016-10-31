@@ -23,6 +23,8 @@ describe('moverFactory', () => {
       expect(typeof mover).toEqual('object');
       expect(mover.line).toEqual(1);
       expect(mover.column).toEqual(2);
+      expect(mover.el).toBeDefined();
+      expect(mover.ground).toBeDefined();
     });
   });
 

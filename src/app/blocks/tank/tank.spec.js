@@ -1,12 +1,8 @@
 import tankFactory from './tank';
 
-const groundMethodSpy = jasmine.createSpy('groundMethod');
-const groundFactorySpy = jasmine.createSpy('groundFactory').and.callFake(() => ({
-  groundMethod: groundMethodSpy
-}));
-const itemMethodSpy = jasmine.createSpy('itemMethod');
-const itemFactorySpy = jasmine.createSpy('itemFactory').and.callFake(() => ({
-  itemMethod: itemMethodSpy
+const canMoveOverMethodSpy = jasmine.createSpy('canMoveOverMethod');
+const canMoveOverFactorySpy = jasmine.createSpy('canMoveOverFactory').and.callFake(() => ({
+  canMoveOverMethod: canMoveOverMethodSpy
 }));
 const moverMethodSpy = jasmine.createSpy('moverMethod');
 const moverFactorySpy = jasmine.createSpy('moverFactory').and.callFake(() => ({
@@ -16,8 +12,7 @@ const rotatorMethodSpy = jasmine.createSpy('rotatorMethod');
 const rotatorFactorySpy = jasmine.createSpy('rotatorFactory').and.callFake(() => ({
   rotatorMethod: rotatorMethodSpy
 }));
-tankFactory.__set__('groundFactory', groundFactorySpy);
-tankFactory.__set__('itemFactory', itemFactorySpy);
+tankFactory.__set__('canMoveOverFactory', canMoveOverFactorySpy);
 tankFactory.__set__('moverFactory', moverFactorySpy);
 tankFactory.__set__('rotatorFactory', rotatorFactorySpy);
 
@@ -37,23 +32,16 @@ describe('tankFactory', () => {
       expect(tank.column).toEqual(2);
     });
 
-    it('should call the ground, item, mover and rotator factories', () => {
-      expect(groundFactorySpy).toHaveBeenCalledWith(1, 2);
-      expect(itemFactorySpy).toHaveBeenCalledWith(1, 2);
+    it('should call the canMoveOver, mover and rotator factories', () => {
+      expect(canMoveOverFactorySpy).toHaveBeenCalledWith(1, 2);
       expect(moverFactorySpy).toHaveBeenCalledWith(1, 2);
       expect(rotatorFactorySpy).toHaveBeenCalledWith(1, 2);
     });
 
-    it('should call an ground method', () => {
-      expect(tank.groundMethod).toBeDefined();
-      tank.groundMethod('test');
-      expect(groundMethodSpy).toHaveBeenCalledWith('test');
-    });
-
-    it('should call an item method', () => {
-      expect(tank.itemMethod).toBeDefined();
-      tank.itemMethod('test');
-      expect(itemMethodSpy).toHaveBeenCalledWith('test');
+    it('should call an canMoveOver method', () => {
+      expect(tank.canMoveOverMethod).toBeDefined();
+      tank.canMoveOverMethod('test');
+      expect(canMoveOverMethodSpy).toHaveBeenCalledWith('test');
     });
 
     it('should call a mover method', () => {

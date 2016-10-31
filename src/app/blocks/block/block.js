@@ -1,15 +1,13 @@
 import blockSettings from '../../settings/blockSettings';
+import cannotMoveOverFactory from '../cannotMoveOver/cannotMoveOver';
 
-function grassFactory(line, column) {
+function blockFactory(line, column) {
+  const cannotMoveOver = cannotMoveOverFactory(line, column);
   const block = {
     line,
     column,
     id: blockSettings.block,
     image: 'assets/images/block.png',
-
-    canMoveOver() {
-      return false;
-    },
 
     canShootThrough() {
       return false;
@@ -18,8 +16,9 @@ function grassFactory(line, column) {
 
   return Object.assign(
     {},
+    cannotMoveOver,
     block
   );
 }
 
-export default grassFactory;
+export default blockFactory;

@@ -1,10 +1,10 @@
 import blockSettings from '../../settings/blockSettings';
-import groundFactory from '../ground/ground';
+import canMoveOverFactory from '../canMoveOver/canMoveOver';
 
 export default flagFactory;
 
 function flagFactory(line, column) {
-  const ground = groundFactory(line, column);
+  const canMoveOver = canMoveOverFactory(line, column);
   const flag = {
     line,
     column,
@@ -18,7 +18,7 @@ function flagFactory(line, column) {
 
   return Object.assign(
     {},
-    ground,
+    canMoveOver,
     flag
   );
 }

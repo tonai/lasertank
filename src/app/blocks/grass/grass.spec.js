@@ -1,10 +1,10 @@
 import grassFactory from './grass';
 
-const groundMethodSpy = jasmine.createSpy('groundMethod');
-const groundFactorySpy = jasmine.createSpy('groundFactory').and.callFake(() => ({
-  groundMethod: groundMethodSpy
+const canMoveOverMethodSpy = jasmine.createSpy('canMoveOverMethod');
+const canMoveOverFactorySpy = jasmine.createSpy('canMoveOverFactory').and.callFake(() => ({
+  canMoveOverMethod: canMoveOverMethodSpy
 }));
-grassFactory.__set__('groundFactory', groundFactorySpy);
+grassFactory.__set__('canMoveOverFactory', canMoveOverFactorySpy);
 
 describe('grassFactory', () => {
   let grass;
@@ -22,14 +22,14 @@ describe('grassFactory', () => {
       expect(grass.column).toEqual(2);
     });
 
-    it('should call the ground factory', () => {
-      expect(groundFactorySpy).toHaveBeenCalledWith(1, 2);
+    it('should call the canMoveOver factory', () => {
+      expect(canMoveOverFactorySpy).toHaveBeenCalledWith(1, 2);
     });
 
-    it('should call a ground method', () => {
-      expect(grass.groundMethod).toBeDefined();
-      grass.groundMethod('test');
-      expect(groundMethodSpy).toHaveBeenCalledWith('test');
+    it('should call a canMoveOver method', () => {
+      expect(grass.canMoveOverMethod).toBeDefined();
+      grass.canMoveOverMethod('test');
+      expect(canMoveOverMethodSpy).toHaveBeenCalledWith('test');
     });
   });
 });

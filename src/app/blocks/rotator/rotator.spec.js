@@ -12,6 +12,8 @@ describe('rotatorFactory', () => {
       expect(typeof rotator).toEqual('object');
       expect(rotator.line).toEqual(1);
       expect(rotator.column).toEqual(2);
+      expect(rotator.el).toBeDefined();
+      expect(rotator.ground).toBeDefined();
       expect(rotator.direction).toEqual(38);
       expect(rotator.angle).toEqual(0);
     });

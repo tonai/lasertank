@@ -1,10 +1,10 @@
 import themeSettings from '../../settings/themeSettings';
 import mapFactory from '../../map';
 
-export default groundFactory;
+export default canMoveOverFactory;
 
-function groundFactory(line, column) {
-  const ground = {
+function canMoveOverFactory(line, column) {
+  const canMoveOver = {
     line,
     column,
     map: mapFactory(),
@@ -22,6 +22,10 @@ function groundFactory(line, column) {
 
     moveOverAfter(block) {},
 
+    canShootThrough() {
+      return true;
+    },
+
     shootOverBefore(direction) {
       let pointList = [];
       const mainDirProperty = direction % 2 === 0 ? 'line' : 'column';
@@ -34,10 +38,6 @@ function groundFactory(line, column) {
         [mainDirProperty]: point,
         [secondaryDirProperty]: (this[secondaryDirProperty] * themeSettings.width) + 14
       }));
-    },
-
-    canShootThrough() {
-      return true;
     },
 
     shootOverAfter(direction) {
@@ -59,5 +59,5 @@ function groundFactory(line, column) {
     }
   };
 
-  return ground;
+  return canMoveOver;
 }
