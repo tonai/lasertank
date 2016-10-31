@@ -6,6 +6,12 @@ const cannotMoveOverFactorySpy = jasmine.createSpy('cannotMoveOverFactory').and.
 }));
 blockFactory.__set__('cannotMoveOverFactory', cannotMoveOverFactorySpy);
 
+const cannotShootThroughMethodSpy = jasmine.createSpy('cannotShootThroughMethod');
+const cannotShootThroughFactorySpy = jasmine.createSpy('cannotShootThroughFactory').and.callFake(() => ({
+  cannotShootThroughMethod: cannotShootThroughMethodSpy
+}));
+blockFactory.__set__('cannotShootThroughFactory', cannotShootThroughFactorySpy);
+
 describe('blockFactory', () => {
   let block;
 
@@ -22,8 +28,9 @@ describe('blockFactory', () => {
       expect(block.column).toEqual(2);
     });
 
-    it('should call the canMoveOver factory', () => {
+    it('should call the canMoveOver and cannotShootThrough factory', () => {
       expect(cannotMoveOverFactorySpy).toHaveBeenCalledWith(1, 2);
+      expect(cannotShootThroughFactorySpy).toHaveBeenCalledWith(1, 2);
     });
 
     it('should call a canMoveOver method', () => {
@@ -31,11 +38,17 @@ describe('blockFactory', () => {
       block.cannotMoveOverMethod('test');
       expect(cannotMoveOverMethodSpy).toHaveBeenCalledWith('test');
     });
+
+    it('should call a cannotShootThrough method', () => {
+      expect(block.cannotShootThroughMethod).toBeDefined();
+      block.cannotShootThroughMethod('test');
+      expect(cannotShootThroughMethodSpy).toHaveBeenCalledWith('test');
+    });
   });
 
-  describe('canShootThrough method', () => {
+  describe('cannotShootThrough method', () => {
     it('should return false', () => {
-      expect(block.canShootThrough()).toEqual(false);
+      expect(block.cannotShootThrough()).toEqual(false);
     });
   });
 });

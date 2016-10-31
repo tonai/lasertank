@@ -1,10 +1,12 @@
 import blockSettings from '../../settings/blockSettings';
 import canMoveOverFactory from '../canMoveOver/canMoveOver';
+import canShootThroughFactory from '../canShootThrough/canShootThrough';
 
 export default flagFactory;
 
 function flagFactory(line, column) {
   const canMoveOver = canMoveOverFactory(line, column);
+  const canShootThrough = canShootThroughFactory(line, column);
   const flag = {
     line,
     column,
@@ -19,6 +21,7 @@ function flagFactory(line, column) {
   return Object.assign(
     {},
     canMoveOver,
+    canShootThrough,
     flag
   );
 }

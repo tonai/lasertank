@@ -6,6 +6,12 @@ const canMoveOverFactorySpy = jasmine.createSpy('canMoveOverFactory').and.callFa
 }));
 flagFactory.__set__('canMoveOverFactory', canMoveOverFactorySpy);
 
+const canShootThroughMethodSpy = jasmine.createSpy('canShootThroughMethod');
+const canShootThroughFactorySpy = jasmine.createSpy('canShootThroughFactory').and.callFake(() => ({
+  canShootThroughMethod: canShootThroughMethodSpy
+}));
+flagFactory.__set__('canShootThroughFactory', canShootThroughFactorySpy);
+
 describe('flagFactory', () => {
   let flag;
 
@@ -24,12 +30,19 @@ describe('flagFactory', () => {
 
     it('should call the canMoveOver factory', () => {
       expect(canMoveOverFactorySpy).toHaveBeenCalledWith(1, 2);
+      expect(canShootThroughFactorySpy).toHaveBeenCalledWith(1, 2);
     });
 
     it('should call a canMoveOver method', () => {
       expect(flag.canMoveOverMethod).toBeDefined();
       flag.canMoveOverMethod('test');
       expect(canMoveOverMethodSpy).toHaveBeenCalledWith('test');
+    });
+
+    it('should call a canShootThrough method', () => {
+      expect(flag.canShootThroughMethod).toBeDefined();
+      flag.canShootThroughMethod('test');
+      expect(canShootThroughMethodSpy).toHaveBeenCalledWith('test');
     });
   });
 

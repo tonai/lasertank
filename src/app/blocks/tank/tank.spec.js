@@ -4,16 +4,24 @@ const canMoveOverMethodSpy = jasmine.createSpy('canMoveOverMethod');
 const canMoveOverFactorySpy = jasmine.createSpy('canMoveOverFactory').and.callFake(() => ({
   canMoveOverMethod: canMoveOverMethodSpy
 }));
+tankFactory.__set__('canMoveOverFactory', canMoveOverFactorySpy);
+
+const canShootThroughMethodSpy = jasmine.createSpy('canShootThroughMethod');
+const canShootThroughFactorySpy = jasmine.createSpy('canShootThroughFactory').and.callFake(() => ({
+  canShootThroughMethod: canShootThroughMethodSpy
+}));
+tankFactory.__set__('canShootThroughFactory', canShootThroughFactorySpy);
+
 const moverMethodSpy = jasmine.createSpy('moverMethod');
 const moverFactorySpy = jasmine.createSpy('moverFactory').and.callFake(() => ({
   moverMethod: moverMethodSpy
 }));
+tankFactory.__set__('moverFactory', moverFactorySpy);
+
 const rotatorMethodSpy = jasmine.createSpy('rotatorMethod');
 const rotatorFactorySpy = jasmine.createSpy('rotatorFactory').and.callFake(() => ({
   rotatorMethod: rotatorMethodSpy
 }));
-tankFactory.__set__('canMoveOverFactory', canMoveOverFactorySpy);
-tankFactory.__set__('moverFactory', moverFactorySpy);
 tankFactory.__set__('rotatorFactory', rotatorFactorySpy);
 
 describe('tankFactory', () => {
@@ -34,6 +42,7 @@ describe('tankFactory', () => {
 
     it('should call the canMoveOver, mover and rotator factories', () => {
       expect(canMoveOverFactorySpy).toHaveBeenCalledWith(1, 2);
+      expect(canShootThroughFactorySpy).toHaveBeenCalledWith(1, 2);
       expect(moverFactorySpy).toHaveBeenCalledWith(1, 2);
       expect(rotatorFactorySpy).toHaveBeenCalledWith(1, 2);
     });
@@ -42,6 +51,12 @@ describe('tankFactory', () => {
       expect(tank.canMoveOverMethod).toBeDefined();
       tank.canMoveOverMethod('test');
       expect(canMoveOverMethodSpy).toHaveBeenCalledWith('test');
+    });
+
+    it('should call a canShootThrough method', () => {
+      expect(tank.canShootThroughMethod).toBeDefined();
+      tank.canShootThroughMethod('test');
+      expect(canShootThroughMethodSpy).toHaveBeenCalledWith('test');
     });
 
     it('should call a mover method', () => {

@@ -1,4 +1,3 @@
-import themeSettings from '../../settings/themeSettings';
 import canMoveOverFactory from './canMoveOver';
 
 describe('canMoveOverFactory', () => {
@@ -53,61 +52,6 @@ describe('canMoveOverFactory', () => {
       expect(block.column).toEqual(0);
       expect(canMoveOver.map.itemsMap[0][0]).toBe(block);
       expect(canMoveOver.map.itemsMap[1][2]).toBe(null);
-    });
-  });
-
-  describe('canShootThrough method', () => {
-    it('should return true', () => {
-      expect(canMoveOver.canShootThrough()).toEqual(true);
-    });
-  });
-
-  describe('shootOverBefore method', () => {
-    it('should return a list of point to draw (direction 37)', () => {
-      const pointList = canMoveOver.shootOverBefore(37);
-      expect(pointList.length).toEqual(themeSettings.width);
-    });
-
-    it('should return a list of point to draw (direction 38)', () => {
-      const pointList = canMoveOver.shootOverBefore(38);
-      expect(pointList.length).toEqual(themeSettings.width);
-    });
-
-    it('should return a list of point to draw (direction 39)', () => {
-      const pointList = canMoveOver.shootOverBefore(39);
-      expect(pointList.length).toEqual(themeSettings.width);
-    });
-
-    it('should return a list of point to draw (direction 40)', () => {
-      const pointList = canMoveOver.shootOverBefore(40);
-      expect(pointList.length).toEqual(themeSettings.width);
-    });
-  });
-
-  describe('shootOverAfter method', () => {
-    it('should return the next block coordinates (direction 37)', () => {
-      const coordinates = canMoveOver.shootOverAfter(37);
-      expect(coordinates).toEqual({column: 1, line: 1});
-    });
-
-    it('should return the next block coordinates (direction 38)', () => {
-      const coordinates = canMoveOver.shootOverAfter(38);
-      expect(coordinates).toEqual({column: 2, line: 0});
-    });
-
-    it('should return the next block coordinates (direction 39)', () => {
-      const coordinates = canMoveOver.shootOverAfter(39);
-      expect(coordinates).toEqual({column: 3, line: 1});
-    });
-
-    it('should return the next block coordinates (direction 40)', () => {
-      const coordinates = canMoveOver.shootOverAfter(40);
-      expect(coordinates).toEqual({column: 2, line: 2});
-    });
-
-    it('should not return the next block coordinates (bad direction)', () => {
-      const coordinates = canMoveOver.shootOverAfter(36);
-      expect(coordinates).toBeUndefined();
     });
   });
 });
