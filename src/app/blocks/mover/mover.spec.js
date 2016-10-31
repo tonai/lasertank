@@ -1,8 +1,8 @@
 import moverFactory from './mover';
 
-const groundBlock = jasmine.createSpyObj('groundBlock', ['canMoveOver', 'moveOverBefore', 'moveOverAfter']);
+const block = jasmine.createSpyObj('blockBlock', ['canMoveOver', 'moveOverBefore', 'moveOverAfter']);
 const map = {
-  getBlock: jasmine.createSpy('getBlock').and.callFake(() => groundBlock)
+  getBlock: jasmine.createSpy('getBlock').and.callFake(() => block)
 };
 
 moverFactory.__set__('mapFactory', () => map);
@@ -12,9 +12,9 @@ describe('moverFactory', () => {
 
   beforeEach(() => {
     mover = moverFactory(1, 2);
-    groundBlock.canMoveOver.calls.reset();
-    groundBlock.moveOverBefore.calls.reset();
-    groundBlock.moveOverAfter.calls.reset();
+    block.canMoveOver.calls.reset();
+    block.moveOverBefore.calls.reset();
+    block.moveOverAfter.calls.reset();
     map.getBlock.calls.reset();
   });
 
@@ -28,23 +28,23 @@ describe('moverFactory', () => {
 
   describe('move method', () => {
     it('should move the block when canMoveOver returns true', () => {
-      groundBlock.canMoveOver.and.callFake(() => true);
+      block.canMoveOver.and.callFake(() => true);
       mover.el = {style: {left: '', right: ''}};
       mover.move(1, 1);
       expect(map.getBlock).toHaveBeenCalledWith(1, 1);
-      expect(groundBlock.canMoveOver).toHaveBeenCalled();
-      expect(groundBlock.moveOverBefore).toHaveBeenCalledWith(mover);
-      expect(groundBlock.moveOverAfter).toHaveBeenCalledWith(mover);
+      expect(block.canMoveOver).toHaveBeenCalled();
+      expect(block.moveOverBefore).toHaveBeenCalledWith(mover);
+      expect(block.moveOverAfter).toHaveBeenCalledWith(mover);
     });
 
     it('should not move the block when canMoveOver returns false', () => {
-      groundBlock.canMoveOver.and.callFake(() => false);
+      block.canMoveOver.and.callFake(() => false);
       mover.el = {style: {left: '', right: ''}};
       mover.move(1, 1);
       expect(map.getBlock).toHaveBeenCalledWith(1, 1);
-      expect(groundBlock.canMoveOver).toHaveBeenCalled();
-      expect(groundBlock.moveOverBefore).not.toHaveBeenCalled();
-      expect(groundBlock.moveOverAfter).not.toHaveBeenCalled();
+      expect(block.canMoveOver).toHaveBeenCalled();
+      expect(block.moveOverBefore).not.toHaveBeenCalled();
+      expect(block.moveOverAfter).not.toHaveBeenCalled();
     });
   });
 });

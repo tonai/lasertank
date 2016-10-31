@@ -8,7 +8,7 @@ describe('rotatorFactory', () => {
   });
 
   describe('initialization', () => {
-    it('should return a ground object', () => {
+    it('should return a rotator object', () => {
       expect(typeof rotator).toEqual('object');
       expect(rotator.line).toEqual(1);
       expect(rotator.column).toEqual(2);
