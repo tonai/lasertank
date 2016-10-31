@@ -1,4 +1,5 @@
 import blockSettings from './settings/blockSettings';
+import themeSettings from './settings/themeSettings';
 import mapSave from './maps/map';
 import mapTmpl from './map.ejs';
 import blocksFactory from './blocks';
@@ -38,8 +39,8 @@ const map = {
     gameEl.innerHTML = mapTmpl({
       ground: this.groundMap,
       items: this.itemsMap,
-      width: this.totalColumns * 29,
-      height: this.totaLines * 29
+      width: this.totalColumns * themeSettings.width,
+      height: this.totaLines * themeSettings.width
     });
 
     this.shootAreaEl = gameEl.querySelector('.js-shoot-area');

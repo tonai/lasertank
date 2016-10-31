@@ -1,3 +1,4 @@
+import themeSettings from '../settings/themeSettings';
 import mapFactory from '../map';
 
 export default groundFactory;
@@ -25,13 +26,13 @@ function groundFactory(line, column) {
       let pointList = [];
       const mainDirProperty = direction % 2 === 0 ? 'line' : 'column';
       const secondaryDirProperty = direction % 2 === 1 ? 'line' : 'column';
-      for (let i = this[mainDirProperty] * 29; i < (this[mainDirProperty] + 1) * 29; i++) {
+      for (let i = this[mainDirProperty] * themeSettings.width; i < (this[mainDirProperty] + 1) * themeSettings.width; i++) {
         pointList.push(i);
       }
       pointList = direction < 39 ? pointList.reverse() : pointList;
       return pointList.map(point => ({
         [mainDirProperty]: point,
-        [secondaryDirProperty]: (this[secondaryDirProperty] * 29) + 14
+        [secondaryDirProperty]: (this[secondaryDirProperty] * themeSettings.width) + 14
       }));
     },
 

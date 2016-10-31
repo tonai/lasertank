@@ -1,3 +1,4 @@
+import themeSettings from '../settings/themeSettings';
 import groundFactory from './ground';
 
 describe('groundFactory', () => {
@@ -58,22 +59,22 @@ describe('groundFactory', () => {
   describe('shootOverBefore method', () => {
     it('should return a list of point to draw (direction 37)', () => {
       const pointList = ground.shootOverBefore(37);
-      expect(pointList.length).toEqual(29);
+      expect(pointList.length).toEqual(themeSettings.width);
     });
 
     it('should return a list of point to draw (direction 38)', () => {
       const pointList = ground.shootOverBefore(38);
-      expect(pointList.length).toEqual(29);
+      expect(pointList.length).toEqual(themeSettings.width);
     });
 
     it('should return a list of point to draw (direction 39)', () => {
       const pointList = ground.shootOverBefore(39);
-      expect(pointList.length).toEqual(29);
+      expect(pointList.length).toEqual(themeSettings.width);
     });
 
     it('should return a list of point to draw (direction 40)', () => {
       const pointList = ground.shootOverBefore(40);
-      expect(pointList.length).toEqual(29);
+      expect(pointList.length).toEqual(themeSettings.width);
     });
   });
 

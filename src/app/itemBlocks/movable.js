@@ -1,3 +1,4 @@
+import themeSettings from '../settings/themeSettings';
 import mapFactory from '../map';
 
 export default movableFactory;
@@ -17,8 +18,8 @@ function movableFactory(line, column) {
   };
 
   function animate(block) {
-    block.el.style.left = `${block.column * 29}px`;
-    block.el.style.top = `${block.line * 29}px`;
+    block.el.style.left = `${block.column * themeSettings.width}px`;
+    block.el.style.top = `${block.line * themeSettings.width}px`;
   }
 
   return movable;
