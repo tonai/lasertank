@@ -1,7 +1,5 @@
 import itemFactory from './item';
 
-itemFactory.__set__('grassFactory', {id: 1});
-
 describe('itemFactory', () => {
   let item;
 

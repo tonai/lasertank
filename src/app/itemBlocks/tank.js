@@ -1,3 +1,4 @@
+import blockSettings from '../settings/blockSettings';
 import groundFactory from '../groundBlocks/ground';
 import itemFactory from './item';
 import shooterFactory from './shooter';
@@ -6,7 +7,6 @@ import rotableFactory from './rotable';
 
 export default tankFactory;
 
-const id = 0;
 function tankFactory(line, column) {
   const ground = groundFactory(line, column);
   const item = itemFactory(line, column);
@@ -16,7 +16,7 @@ function tankFactory(line, column) {
   const tank = {
     line,
     column,
-    id,
+    id: blockSettings.tank,
     image: 'assets/images/tank.png',
 
     shootOverBefore(direction) {
@@ -34,4 +34,3 @@ function tankFactory(line, column) {
     tank
   );
 }
-tankFactory.id = id;

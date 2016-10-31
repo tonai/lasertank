@@ -1,14 +1,14 @@
+import blockSettings from '../settings/blockSettings';
 import groundFactory from './ground';
 
 export default flagFactory;
 
-const id = 2;
 function flagFactory(line, column) {
   const ground = groundFactory(line, column);
   const flag = {
     line,
     column,
-    id,
+    id: blockSettings.flag,
     image: 'assets/images/flag.png',
 
     moveOverAfter(block) {
@@ -22,4 +22,3 @@ function flagFactory(line, column) {
     flag
   );
 }
-flagFactory.id = id;

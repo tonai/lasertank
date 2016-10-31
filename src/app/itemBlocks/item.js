@@ -1,4 +1,4 @@
-import grassFactory from '../groundBlocks/grass';
+import blockSettings from '../settings/blockSettings';
 
 export default itemFactory;
 
@@ -7,7 +7,7 @@ function itemFactory(line, column) {
     line,
     column,
     el: null,
-    ground: grassFactory.id,
+    ground: blockSettings.grass,
 
     canMoveOver() {
       return false;

@@ -1,7 +1,7 @@
+import blockSettings from './settings/blockSettings';
 import mapSave from './maps/map';
 import mapTmpl from './map.ejs';
 import blocksFactory from './blocks';
-import tankFactory from './itemBlocks/tank';
 import './map.scss';
 
 const map = {
@@ -17,7 +17,7 @@ const map = {
         line
           .forEach((cell, y) => {
             const block = this.blocks[cell](x, y);
-            if (block.id === tankFactory.id) {
+            if (block.id === blockSettings.tank) {
               this.player = block;
             }
             if (block.ground) {
