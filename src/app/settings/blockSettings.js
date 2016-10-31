@@ -1,5 +1,6 @@
 export default {
   tank: 0,
   grass: 1,
-  flag: 2
+  flag: 2,
+  block: 3
 };
