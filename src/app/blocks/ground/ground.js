@@ -36,6 +36,10 @@ function groundFactory(line, column) {
       }));
     },
 
+    canShootThrough() {
+      return true;
+    },
+
     shootOverAfter(direction) {
       switch (direction) {
         case 37:

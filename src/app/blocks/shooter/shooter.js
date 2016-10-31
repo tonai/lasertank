@@ -18,12 +18,15 @@ function shooterFactory(line, column) {
     },
 
     getPointList(block) {
-      let pointList = block.shootOverBefore(this.direction);
-      const coords = block.shootOverAfter(this.direction);
-      if (coords) {
-        const block = this.map.getBlock(coords.line, coords.column);
-        if (block) {
-          pointList = pointList.concat(this.getPointList(block));
+      let pointList = [];
+      if (block.canShootThrough()) {
+        pointList = block.shootOverBefore(this.direction);
+        const coords = block.shootOverAfter(this.direction);
+        if (coords) {
+          const block = this.map.getBlock(coords.line, coords.column);
+          if (block) {
+            pointList = pointList.concat(this.getPointList(block));
+          }
         }
       }
       return pointList;
