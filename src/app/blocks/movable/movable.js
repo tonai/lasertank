@@ -11,9 +11,11 @@ function movableFactory(line, column) {
 
     move(linePos, columnPos) {
       const groundBlock = this.map.getBlock(linePos, columnPos);
-      groundBlock.moveOverBefore(this);
-      animate(this);
-      groundBlock.moveOverAfter(this);
+      if (groundBlock && groundBlock.canMoveOver()) {
+        groundBlock.moveOverBefore(this);
+        animate(this);
+        groundBlock.moveOverAfter(this);
+      }
     }
   };
 

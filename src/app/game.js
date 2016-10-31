@@ -34,10 +34,7 @@ const game = {
 
       case 37: // left
         if (keyCode === this.player.direction) {
-          const block = this.map.getBlock(this.player.line, this.player.column - 1);
-          if (block && block.canMoveOver()) {
-            this.player.move(this.player.line, this.player.column - 1);
-          }
+          this.player.move(this.player.line, this.player.column - 1);
         } else {
           this.player.rotate(keyCode);
         }
@@ -45,10 +42,7 @@ const game = {
 
       case 38: // top
         if (keyCode === this.player.direction) {
-          const block = this.map.getBlock(this.player.line - 1, this.player.column);
-          if (block && block.canMoveOver()) {
-            this.player.move(this.player.line - 1, this.player.column);
-          }
+          this.player.move(this.player.line - 1, this.player.column);
         } else {
           this.player.rotate(keyCode);
         }
@@ -56,10 +50,7 @@ const game = {
 
       case 39: // right
         if (keyCode === this.player.direction) {
-          const block = this.map.getBlock(this.player.line, this.player.column + 1);
-          if (block && block.canMoveOver()) {
-            this.player.move(this.player.line, this.player.column + 1);
-          }
+          this.player.move(this.player.line, this.player.column + 1);
         } else {
           this.player.rotate(keyCode);
         }
@@ -67,10 +58,7 @@ const game = {
 
       case 40: // bottom
         if (keyCode === this.player.direction) {
-          const block = this.map.getBlock(this.player.line + 1, this.player.column);
-          if (block && block.canMoveOver()) {
-            this.player.move(this.player.line + 1, this.player.column);
-          }
+          this.player.move(this.player.line + 1, this.player.column);
         } else {
           this.player.rotate(keyCode);
         }
