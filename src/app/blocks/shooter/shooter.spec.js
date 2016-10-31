@@ -12,6 +12,7 @@ describe('shooterFactory', () => {
       updateCanvas: jasmine.createSpy('updateCanvas')
     };
     shooterFactory.__set__('mapFactory', () => map);
+    shooter.canShootThrough = jasmine.createSpy('canShootThrough');
     shooter.shootOverBefore = jasmine.createSpy('shootOverBefore');
     shooter.shootOverAfter = jasmine.createSpy('shootOverAfter');
   });
@@ -26,8 +27,15 @@ describe('shooterFactory', () => {
   });
 
   describe('getPointList method', () => {
+    it('should get an empty list of points to draw when canShootThrough returns false', () => {
+      shooter.canShootThrough.and.callFake(() => false);
+      const pointList = shooter.getPointList(shooter);
+      expect(pointList).toEqual([]);
+    });
+
     it('should get the list of points to draw (case 1)', () => {
       let loop = 0;
+      shooter.canShootThrough.and.callFake(() => true);
       shooter.shootOverBefore.and.callFake(() => [1, 2, 3]);
       shooter.shootOverAfter.and.callFake(() => ({line: 1, column: 1}));
       shooter.map.getBlock.and.callFake(() => {
@@ -35,6 +43,7 @@ describe('shooterFactory', () => {
         switch (loop) {
           case 1:
             return {
+              canShootThrough: () => true,
               shootOverBefore: () => [4, 5, 6],
               shootOverAfter: () => null
             };
@@ -52,6 +61,7 @@ describe('shooterFactory', () => {
 
     it('should get the list of points to draw (case 2)', () => {
       let loop = 0;
+      shooter.canShootThrough.and.callFake(() => true);
       shooter.shootOverBefore.and.callFake(() => [1, 2, 3]);
       shooter.shootOverAfter.and.callFake(() => ({line: 1, column: 1}));
       shooter.map.getBlock.and.callFake(() => {
@@ -59,6 +69,7 @@ describe('shooterFactory', () => {
         switch (loop) {
           case 1:
             return {
+              canShootThrough: () => true,
               shootOverBefore: () => [4, 5, 6],
               shootOverAfter: () => ({line: 1, column: 0})
             };
@@ -78,6 +89,7 @@ describe('shooterFactory', () => {
 
   describe('draw method', () => {
     it('should draw the shoot', done => {
+      shooter.canShootThrough.and.callFake(() => true);
       shooter.shootOverBefore.and.callFake(() => [
         {line: 2, column: 2},
         {line: 3, column: 2},

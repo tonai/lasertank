@@ -1,6 +1,6 @@
 import movableFactory from './movable';
 
-const groundBlock = jasmine.createSpyObj('groundBlock', ['moveOverBefore', 'moveOverAfter']);
+const groundBlock = jasmine.createSpyObj('groundBlock', ['canMoveOver', 'moveOverBefore', 'moveOverAfter']);
 const map = {
   getBlock: jasmine.createSpy('getBlock').and.callFake(() => groundBlock)
 };
@@ -12,6 +12,10 @@ describe('movableFactory', () => {
 
   beforeEach(() => {
     movable = movableFactory(1, 2);
+    groundBlock.canMoveOver.calls.reset();
+    groundBlock.moveOverBefore.calls.reset();
+    groundBlock.moveOverAfter.calls.reset();
+    map.getBlock.calls.reset();
   });
 
   describe('initialization', () => {
@@ -23,12 +27,24 @@ describe('movableFactory', () => {
   });
 
   describe('move method', () => {
-    it('should move the block', () => {
+    it('should move the block when canMoveOver returns true', () => {
+      groundBlock.canMoveOver.and.callFake(() => true);
       movable.el = {style: {left: '', right: ''}};
       movable.move(1, 1);
       expect(map.getBlock).toHaveBeenCalledWith(1, 1);
+      expect(groundBlock.canMoveOver).toHaveBeenCalled();
       expect(groundBlock.moveOverBefore).toHaveBeenCalledWith(movable);
       expect(groundBlock.moveOverAfter).toHaveBeenCalledWith(movable);
+    });
+
+    it('should not move the block when canMoveOver returns false', () => {
+      groundBlock.canMoveOver.and.callFake(() => false);
+      movable.el = {style: {left: '', right: ''}};
+      movable.move(1, 1);
+      expect(map.getBlock).toHaveBeenCalledWith(1, 1);
+      expect(groundBlock.canMoveOver).toHaveBeenCalled();
+      expect(groundBlock.moveOverBefore).not.toHaveBeenCalled();
+      expect(groundBlock.moveOverAfter).not.toHaveBeenCalled();
     });
   });
 });

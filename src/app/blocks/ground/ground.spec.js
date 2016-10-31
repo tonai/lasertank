@@ -56,6 +56,12 @@ describe('groundFactory', () => {
     });
   });
 
+  describe('canShootThrough method', () => {
+    it('should return true', () => {
+      expect(ground.canShootThrough()).toEqual(true);
+    });
+  });
+
   describe('shootOverBefore method', () => {
     it('should return a list of point to draw (direction 37)', () => {
       const pointList = ground.shootOverBefore(37);
