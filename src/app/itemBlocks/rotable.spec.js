@@ -18,11 +18,17 @@ describe('rotableFactory', () => {
   });
 
   describe('rotate method', () => {
+    it('should not rotate', () => {
+      rotable.el = {style: {transform: ''}};
+      rotable.rotate();
+      expect(rotable.angle).toEqual(0);
+      expect(rotable.direction).toEqual(38);
+    });
+
     it('should rotate to direction 37', () => {
       rotable.el = {style: {transform: ''}};
       rotable.rotate(37);
       expect(rotable.angle).toEqual(-90);
-      expect(rotable.direction).toEqual(37);
       expect(rotable.direction).toEqual(37);
     });
 
