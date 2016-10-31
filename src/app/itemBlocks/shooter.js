@@ -1,3 +1,4 @@
+import shooterSettings from '../settings/shooterSettings';
 import mapFactory from '../map';
 
 export default shooterFactory;
@@ -8,7 +9,7 @@ function shooterFactory(line, column) {
     column,
     direction: 38,
     map: mapFactory(),
-    speed: 500, // px/s
+    speed: shooterSettings.speed,
 
     shoot() {
       document.dispatchEvent(new Event('actionStart'));
