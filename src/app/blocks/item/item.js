@@ -1,4 +1,4 @@
-import blockSettings from '../settings/blockSettings';
+import blockSettings from '../../settings/blockSettings';
 
 export default itemFactory;
 

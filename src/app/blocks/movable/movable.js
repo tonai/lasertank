@@ -1,5 +1,5 @@
-import themeSettings from '../settings/themeSettings';
-import mapFactory from '../map';
+import themeSettings from '../../settings/themeSettings';
+import mapFactory from '../../map';
 
 export default movableFactory;
 

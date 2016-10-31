@@ -1,5 +1,5 @@
-import blockSettings from '../settings/blockSettings';
-import groundFactory from './ground';
+import blockSettings from '../../settings/blockSettings';
+import groundFactory from '../ground/ground';
 
 export default flagFactory;
 

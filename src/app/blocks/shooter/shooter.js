@@ -1,5 +1,5 @@
-import shooterSettings from '../settings/shooterSettings';
-import mapFactory from '../map';
+import shooterSettings from '../../settings/shooterSettings';
+import mapFactory from '../../map';
 
 export default shooterFactory;
 

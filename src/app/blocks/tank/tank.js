@@ -1,9 +1,9 @@
-import blockSettings from '../settings/blockSettings';
-import groundFactory from '../groundBlocks/ground';
-import itemFactory from './item';
-import shooterFactory from './shooter';
-import movableFactory from './movable';
-import rotableFactory from './rotable';
+import blockSettings from '../../settings/blockSettings';
+import groundFactory from '../ground/ground';
+import itemFactory from '../item/item';
+import shooterFactory from '../shooter/shooter';
+import movableFactory from '../movable/movable';
+import rotableFactory from '../rotable/rotable';
 
 export default tankFactory;
 

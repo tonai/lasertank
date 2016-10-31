@@ -1,4 +1,4 @@
-import themeSettings from '../settings/themeSettings';
+import themeSettings from '../../settings/themeSettings';
 import groundFactory from './ground';
 
 describe('groundFactory', () => {

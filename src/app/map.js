@@ -2,7 +2,7 @@ import blockSettings from './settings/blockSettings';
 import themeSettings from './settings/themeSettings';
 import mapSave from './maps/map';
 import mapTmpl from './map.ejs';
-import blocksFactory from './blocks';
+import blocksFactory from './blocks/blocks';
 import './map.scss';
 
 const map = {
