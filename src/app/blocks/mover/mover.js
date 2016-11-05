@@ -4,6 +4,11 @@ import mapFactory from '../../map';
 
 export default moverFactory;
 
+/**
+ * Defines blocks that can move.
+ *
+ * @module blocks/mover
+ */
 function moverFactory(line, column) {
   const mover = {
     line,
@@ -12,6 +17,12 @@ function moverFactory(line, column) {
     ground: blockSettings.grass,
     map: mapFactory(),
 
+    /**
+     * Moves the mover block.
+     *
+     * @param {Number} linePos Destination line position.
+     * @param {Number} columnPos Destination column position.
+     */
     move(linePos, columnPos) {
       const groundBlock = this.map.getBlock(linePos, columnPos);
       if (groundBlock && groundBlock.canMoveOver()) {
@@ -22,6 +33,11 @@ function moverFactory(line, column) {
     }
   };
 
+  /**
+   * Animate the mover block.
+   *
+   * @param {Object} block Mover block.
+   */
   function animate(block) {
     block.el.style.left = `${block.column * themeSettings.width}px`;
     block.el.style.top = `${block.line * themeSettings.width}px`;

@@ -1,6 +1,14 @@
 import mapFactory from './map';
 
+export default gameFactory;
+
+/**
+ * game singleton.
+ */
 const game = {
+  /**
+   * Initialize the game.
+   */
   init() {
     this.map = mapFactory();
     this.map.init();
@@ -21,6 +29,11 @@ const game = {
     }
   },
 
+  /**
+   * Manange key controls.
+   *
+   * @param {Event} event Event object.
+   */
   keydownCallback(event) {
     if (this.isPaused) {
       return false;
@@ -68,6 +81,9 @@ const game = {
     }
   },
 
+  /**
+   * Manange victory.
+   */
   winCallback() {
     console.log('You win !');
     Object
@@ -76,6 +92,11 @@ const game = {
   }
 };
 
-export default function () {
+/**
+ * Main game module.
+ *
+ * @module game
+ */
+function gameFactory() {
   return game;
 }

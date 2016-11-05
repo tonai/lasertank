@@ -1,3 +1,8 @@
+/**
+ * Module exporting the block IDs.
+ *
+ * @module settings/blockSettings
+ */
 export default {
   tank: 0,
   grass: 1,

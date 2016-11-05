@@ -3,16 +3,33 @@ import mapFactory from '../../map';
 
 export default canShootThroughFactory;
 
+/**
+ * Defines blocks for which mover shooter can shoot through.
+ *
+ * @module blocks/canShootThrough
+ */
 function canShootThroughFactory(line, column) {
   const canShootThrough = {
     line,
     column,
     map: mapFactory(),
 
+    /**
+     * Can shooter block shoot through this block ?
+     *
+     * @returns {Boolean} Yes or no ?
+     */
     canShootThrough() {
       return true;
     },
 
+    /**
+     * Function called before the shoot is drawn.
+     *
+     * @param {Object} block Shooter block.
+     *
+     * @returns {Array} List of points.
+     */
     shootOverBefore(direction) {
       let pointList = [];
       const mainDirProperty = direction % 2 === 0 ? 'line' : 'column';
@@ -27,6 +44,13 @@ function canShootThroughFactory(line, column) {
       }));
     },
 
+    /**
+     * Function called after the shoot is drawn.
+     *
+     * @param {Object} block Shooter block.
+     *
+     * @returns {Object} The next block coordinates.
+     */
     shootOverAfter(direction) {
       switch (direction) {
         case 37:

@@ -7,6 +7,11 @@ import rotatorFactory from '../rotator/rotator';
 
 export default tankFactory;
 
+/**
+ * Tank block factory.
+ *
+ * @module blocks/tank
+ */
 function tankFactory(line, column) {
   const canMoveOver = canMoveOverFactory(line, column);
   const canShootThrough = canShootThroughFactory(line, column);
@@ -19,6 +24,13 @@ function tankFactory(line, column) {
     id: blockSettings.tank,
     image: 'assets/images/tank.png',
 
+    /**
+     * Function called before the shoot is drawn.
+     *
+     * @param {Object} block Shooter block.
+     *
+     * @returns {Array} List of points.
+     */
     shootOverBefore(direction) {
       return [];
     }

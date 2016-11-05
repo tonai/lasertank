@@ -2,6 +2,11 @@ import blockSettings from '../../settings/blockSettings';
 
 export default rotatorFactory;
 
+/**
+ * Defines blocks that can rotate.
+ *
+ * @module blocks/rotator
+ */
 function rotatorFactory(line, column) {
   const rotator = {
     line,
@@ -11,6 +16,11 @@ function rotatorFactory(line, column) {
     direction: 38,
     angle: 0,
 
+    /**
+     * Rotates the rotator block.
+     *
+     * @param {Number|Boolean} direction New direction.
+     */
     rotate(direction) {
       if (direction >= 37 && direction <= 40) {
         if (direction === 37 && this.direction === 40) {
@@ -40,6 +50,11 @@ function rotatorFactory(line, column) {
     }
   };
 
+  /**
+   * Animate the rotator block.
+   *
+   * @param {Object} block Rotator block.
+   */
   function animate(block) {
     block.el.style.transform = `rotateZ(${block.angle}deg)`;
   }

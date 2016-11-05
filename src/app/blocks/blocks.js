@@ -4,7 +4,14 @@ import grassFactory from './grass/grass';
 import flagFactory from './flag/flag';
 import blockFactory from './block/block';
 
-export default function () {
+export default blocksFactory;
+
+/**
+ * Module exporting all "real" block factories.
+ *
+ * @module blocks/blocks
+ */
+function blocksFactory() {
   return {
     [blockSettings.tank]: tankFactory,
     [blockSettings.grass]: grassFactory,

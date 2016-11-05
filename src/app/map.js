@@ -5,7 +5,15 @@ import mapTmpl from './map.ejs';
 import blocksFactory from './blocks/blocks';
 import './map.scss';
 
+export default mapFactory;
+
+/**
+ * map singleton.
+ */
 const map = {
+  /**
+   * Initialize the map.
+   */
   init() {
     this.blocks = blocksFactory();
     this.groundMap = [];
@@ -35,6 +43,11 @@ const map = {
     this.totaLines = this.groundMap.length;
   },
 
+  /**
+   * Draw the map.
+   *
+   * @param {Node} gameEl game main DOM element.
+   */
   draw(gameEl) {
     gameEl.innerHTML = mapTmpl({
       ground: this.groundMap,
@@ -58,6 +71,13 @@ const map = {
       });
   },
 
+  /**
+   * Get a block from coordinates.
+   *
+   * @param {Number} line Map line coordinate.
+   * @param {Number} column Map column coordinate.
+   * @returns {Object|Boolean} Item block if exists or ground block or false.
+   */
   getBlock(line, column) {
     if (line < 0 || column < 0 || line > this.totaLines - 1 || column > this.totalColumns - 1) {
       return false;
@@ -67,6 +87,12 @@ const map = {
       this.groundMap[line][column];
   },
 
+  /**
+   * Draw a pixel in the canvas data.
+   *
+   * @param {Number} x x coordinate in the canvas.
+   * @param {Number} y y coordinate in the canvas.
+   */
   drawCanvasPixel(x, y, r, g, b, a) {
     const index = (x + y * this.shootAreaEl.width) * 4;
     this.shootAreaData.data[index + 0] = r;
@@ -75,16 +101,27 @@ const map = {
     this.shootAreaData.data[index + 3] = a;
   },
 
+  /**
+   * Update the canvas display.
+   */
   updateCanvas() {
     this.shootAreaCtx.putImageData(this.shootAreaData, 0, 0);
   },
 
+  /**
+   * Clear the canvas display.
+   */
   clearCanvas() {
     this.shootAreaCtx.clearRect(0, 0, this.shootAreaEl.width, this.shootAreaEl.height);
     this.shootAreaData = this.shootAreaCtx.getImageData(0, 0, this.shootAreaEl.width, this.shootAreaEl.height);
   }
 };
 
-export default function () {
+/**
+ * Module managing the game map.
+ *
+ * @module map
+ */
+function mapFactory() {
   return map;
 }
