@@ -4,8 +4,8 @@
  * @module settings/blockSettings
  */
 export default {
-  tank: 0,
-  grass: 1,
-  flag: 2,
-  block: 3
+  grass: 0,
+  flag: 1,
+  block: 29,
+  tank: 100
 };

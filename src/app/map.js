@@ -29,12 +29,12 @@ const map = {
             if (block.id === blockSettings.tank) {
               this.player = block;
             }
-            if (block.ground) {
-              this.itemsMap[x].push(block);
-              this.groundMap[x].push(this.blocks[block.ground](x, y));
-            } else {
+            if (typeof block.ground === 'undefined') {
               this.itemsMap[x].push(null);
               this.groundMap[x].push(block);
+            } else {
+              this.itemsMap[x].push(block);
+              this.groundMap[x].push(this.blocks[block.ground](x, y));
             }
           });
       });
