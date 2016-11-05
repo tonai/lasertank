@@ -1,18 +1,18 @@
 import mapFactory from './map';
 
 const mapSave = [
-  [0, 1],
-  [1, 2]
+  [100, 0],
+  [0, 1]
 ];
 const blocks = {
-  0: (line, column) => ({id: 0, ground: 1, line, column}),
-  1: (line, column) => ({id: 1, line, column}),
-  2: (line, column) => ({id: 2, line, column})
+  100: (line, column) => ({id: 100, ground: 0, line, column}),
+  0: (line, column) => ({id: 0, line, column}),
+  1: (line, column) => ({id: 1, line, column})
 };
 
 mapFactory.__set__('mapSave', mapSave);
 mapFactory.__set__('blocksFactory', () => blocks);
-mapFactory.__set__('tankFactory', {id: 0});
+mapFactory.__set__('tankFactory', {id: 100});
 
 describe('mapFactory', () => {
   let map;
@@ -27,10 +27,10 @@ describe('mapFactory', () => {
       expect(map.totalColumns).toEqual(2);
       expect(map.totaLines).toEqual(2);
       expect(map.groundMap).toEqual([
-        [jasmine.objectContaining({id: 1}), jasmine.objectContaining({id: 1})],
-        [jasmine.objectContaining({id: 1}), jasmine.objectContaining({id: 2})]
+        [jasmine.objectContaining({id: 0}), jasmine.objectContaining({id: 0})],
+        [jasmine.objectContaining({id: 0}), jasmine.objectContaining({id: 1})]
       ]);
-      expect(map.itemsMap).toEqual([[jasmine.objectContaining({id: 0}), null], [null, null]]);
+      expect(map.itemsMap).toEqual([[jasmine.objectContaining({id: 100}), null], [null, null]]);
     });
   });
 
@@ -45,11 +45,11 @@ describe('mapFactory', () => {
 
   describe('getBlock method', () => {
     it('should return a tank block', () => {
-      expect(map.getBlock(0, 0)).toEqual(jasmine.objectContaining({id: 0}));
+      expect(map.getBlock(0, 0)).toEqual(jasmine.objectContaining({id: 100}));
     });
 
     it('should return a flag block', () => {
-      expect(map.getBlock(1, 1)).toEqual(jasmine.objectContaining({id: 2}));
+      expect(map.getBlock(1, 1)).toEqual(jasmine.objectContaining({id: 1}));
     });
 
     it('should not return a block (out of bound)', () => {

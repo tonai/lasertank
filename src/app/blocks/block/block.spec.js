@@ -45,10 +45,4 @@ describe('blockFactory', () => {
       expect(cannotShootThroughMethodSpy).toHaveBeenCalledWith('test');
     });
   });
-
-  describe('cannotShootThrough method', () => {
-    it('should return false', () => {
-      expect(block.cannotShootThrough()).toEqual(false);
-    });
-  });
 });
