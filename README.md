@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-* [NodeJS](https://nodejs.org).
+* [NodeJS](https://nodejs.org) version 6.x.
 
 ## Install
 
